@@ -1,2 +1,2 @@
 [vpn]
-your-server-host # <= Change to the Host or IP address of your server!
+<ipaddre> ansible_ssh_private_key_file=/home/shu1r0/.ssh/id_rsa

@@ -1,24 +1,34 @@
+- name: set Pass (ignore errors)
+  become: true
+  become_user: root
+  command: "{{ softether_dir }}/vpncmd /SERVER 127.0.0.1 /CMD {{ item }}"
+  loop:
+    - ServerPasswordSet {{ admin_pass }}
+
+- name: set HUB (ignore errors)
+  become: true
+  become_user: root
+  command: "{{ softether_dir }}/vpncmd /SERVER 127.0.0.1 /PASSWORD:{{ admin_pass }} /CMD {{ item }}"
+  loop:
+    - HubCreate {{ default_hub_name }} /PASSWORD:{{ default_hub_pass }}
+    - BridgeCreate {{ default_hub_name }} /DEVICE:{{ default_bridge_dev }} /TAP:{{ default_tap }}
+  ignore_errors: true
+
 - name: add vpn users (ignore errors)
   become: true
   become_user: root
-  command: "{{ softether_dir }}/vpncmd /SERVER 127.0.0.1 /HUB:default /CMD {{ item }}"
+  command: "{{ softether_dir }}/vpncmd /SERVER 127.0.0.1 /PASSWORD:{{ admin_pass }} /HUB:{{ default_hub_name }} /CMD {{ item }}"
   loop:
     - UserCreate {{ vpn_user }} /GROUP:none /REALNAME:none /NOTE:none
     - UserPasswordSet {{ vpn_user }} /PASSWORD:{{ vpn_pass }}
   ignore_errors: true
 
-- name: enable L2TP over IPsec
+- name: enable VPN azure (ignore errors)
   become: true
   become_user: root
-  command: >
-    {{ softether_dir }}/vpncmd /SERVER 127.0.0.1 /ADMINHUB:default /CMD
-    IPsecEnable /L2TP:yes /L2TPRAW:no /ETHERIP:no /PSK:{{ vpn_shared_pass }} /DEFAULTHUB:default
-
-- name: additional settings
-  become: true
-  become_user: root
-  command: "{{ softether_dir }}/vpncmd /SERVER 127.0.0.1 /HUB:default /CMD {{ item }}"
+  command: "{{ softether_dir }}/vpncmd /SERVER 127.0.0.1 /PASSWORD:{{ admin_pass }} /CMD {{ item }}"
   loop:
-    - SecureNatEnable
-    - NatEnable
-    - DHCPEnable
+    - DynamicDnsSetHostname {{ server_hostname }}
+    - VpnAzureSetEnable yes
+  ignore_errors: true
+
