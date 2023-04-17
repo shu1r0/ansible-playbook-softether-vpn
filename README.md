@@ -19,13 +19,12 @@ see **[SoftEther VPN Project](https://www.softether.org)**
     ```sh
     ansible-galaxy collection install community.general
     ```
-
 1. Update `./hosts`
     ```
     vi ./hosts
     ```
     You should change `your-server-host` to your **[Host](http://man7.org/linux/man-pages/man5/ssh_config.5.html)**
-    
+1. Set vpn_server.config to `./roles/vpn/files/` [Option]
 1. Deploy
     ```sh
     ansible-playbook -i hosts vpn.yml

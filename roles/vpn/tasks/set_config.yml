@@ -1,0 +1,20 @@
+- name: Stop softether
+  become: true
+  become_user: root
+  service:
+    name: softether
+    state: stopped
+
+- name: Copy vpn_server.config
+  become: true
+  copy:
+    src:  files/vpn_server.config
+    dest: "{{ vpn_server_config }}"
+  ignore_errors: yes
+
+- name: Start softether
+  become: true
+  become_user: root
+  service:
+    name: softether
+    state: started
