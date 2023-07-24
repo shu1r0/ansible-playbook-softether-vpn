@@ -1,0 +1,12 @@
+- name: Check if the file exists
+  stat:
+    path: "{{ vpn_server_config }}"
+  register: config_file
+
+- name: Get vpn_server.config
+  become: true
+  fetch:
+    src: "{{ vpn_server_config }}"
+    dest: files/vpn_server.config
+    flat: yes
+  when: config_file.stat.exists

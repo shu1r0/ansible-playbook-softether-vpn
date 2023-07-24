@@ -10,7 +10,7 @@
   copy:
     src:  files/vpn_server.config
     dest: "{{ vpn_server_config }}"
-  ignore_errors: yes
+  ignore_errors: true
 
 - name: Start softether
   become: true
