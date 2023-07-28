@@ -1,4 +1,2 @@
 softether_dir: /opt/softether
-vpnserver_src: https://github.com/SoftEtherVPN/SoftEtherVPN_Stable/releases/download/v4.38-9760-rtm/softether-vpnserver-v4.38-9760-rtm-2021.08.17-linux-arm64-64bit.tar.gz
 vpn_server_config: /opt/softether/vpn_server.config
-setting_backup: true

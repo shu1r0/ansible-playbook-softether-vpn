@@ -8,7 +8,7 @@
 - name: Copy vpn_server.config
   become: true
   copy:
-    src:  files/vpn_server.config
+    src:  files/"{{ ansible_host }}"_vpn_server.config
     dest: "{{ vpn_server_config }}"
   ignore_errors: true
 
