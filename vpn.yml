@@ -1,6 +1,14 @@
 - hosts: vpn
   roles:
-    - apt
+    - role: apt
+      tags:
+        - apt
+    - role: ufw
+      tags:
+        - ufw
     - role: vpn
-      setting_backup: true
-    - vpn-setting
+      tags:
+        - vpn
+    - role: vpn-setting
+      tags:
+        - vpn-setting

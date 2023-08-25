@@ -14,8 +14,12 @@
 
 - name: Add vpn users (ignore errors)
   become: true
-  ansible.builtin.command:
-    - "{{ softether_dir }}/vpncmd /SERVER 127.0.0.1 /PASSWORD:{{ admin_pass }} /HUB:{{ default_hub_name }} /CMD UserCreate {{ item['name'] }} /GROUP:none /REALNAME:none /NOTE:none"
-    - "{{ softether_dir }}/vpncmd /SERVER 127.0.0.1 /PASSWORD:{{ admin_pass }} /HUB:{{ default_hub_name }} /CMD UserPasswordSet {{ item['name'] }} /PASSWORD:{{ item['passwd'] }}"
+  ansible.builtin.command: "{{ softether_dir }}/vpncmd /SERVER 127.0.0.1 /PASSWORD:{{ admin_pass }} /HUB:{{ default_hub_name }} /CMD UserCreate {{ item['name'] }} /GROUP:none /REALNAME:none /NOTE:none"
+  loop: "{{ vpn_users }}"
+  ignore_errors: true
+
+- name: Add vpn user's passwd (ignore errors)
+  become: true
+  ansible.builtin.command: "{{ softether_dir }}/vpncmd /SERVER 127.0.0.1 /PASSWORD:{{ admin_pass }} /HUB:{{ default_hub_name }} /CMD UserPasswordSet {{ item['name'] }} /PASSWORD:{{ item['passwd'] }}"
   loop: "{{ vpn_users }}"
   ignore_errors: true
