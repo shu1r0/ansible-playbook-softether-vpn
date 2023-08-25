@@ -1,7 +1,8 @@
-- name: install build packages
+- name: Install build packages
   become: true
-  become_user: root
-  apt:
+  ansible.builtin.apt:
     name:
       - build-essential
     state: latest
+    autoremove: yes
+    update_cache: yes

@@ -1,20 +1,18 @@
 - name: Stop softether
   become: true
-  become_user: root
-  service:
+  ansible.builtin.service:
     name: softether
     state: stopped
 
 - name: Copy vpn_server.config
   become: true
-  copy:
+  ansible.builtin.copy:
     src:  files/"{{ ansible_host }}"_vpn_server.config
     dest: "{{ vpn_server_config }}"
   ignore_errors: true
 
 - name: Start softether
   become: true
-  become_user: root
-  service:
+  ansible.builtin.service:
     name: softether
     state: started

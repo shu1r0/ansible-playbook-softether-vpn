@@ -1,0 +1,4 @@
+- name: Enable VPN azure (ignore errors)
+  become: true
+  ansible.builtin.command: "{{ softether_dir }}/vpncmd /SERVER 127.0.0.1 /PASSWORD:{{ admin_pass }} /CMD VpnAzureSetEnable yes"
+  ignore_errors: true

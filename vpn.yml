@@ -1,9 +1,6 @@
 - hosts: vpn
-  user: root
-  vars_files:
-    - group_vars/vars.yml
   roles:
     - apt
     - role: vpn
       setting_backup: true
-    # - vpn-setting
+    - vpn-setting

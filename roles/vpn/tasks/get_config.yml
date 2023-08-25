@@ -1,11 +1,11 @@
 - name: Check if the file exists
-  stat:
+  ansible.builtin.stat:
     path: "{{ vpn_server_config }}"
   register: config_file
 
 - name: Get vpn_server.config
   become: true
-  fetch:
+  ansible.builtin.fetch:
     src: "{{ vpn_server_config }}"
     dest: files/"{{ ansible_host }}"_vpn_server.config
     flat: yes

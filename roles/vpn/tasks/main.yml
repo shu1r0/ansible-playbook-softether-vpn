@@ -1,7 +1,14 @@
-- import_tasks: get_config.yml
+- name: Backup SoftEther config file
+  ansible.builtin.import_tasks: get_config.yml
   when: setting_backup
-- import_tasks: install.yml
-- import_tasks: ufw.yml
-- import_tasks: service.yml
-- import_tasks: set_config.yml
+- name: Install SoftEther
+  ansible.builtin.import_tasks: install.yml
+- name: Setting ufw
+  ansible.builtin.import_tasks: ufw.yml
+  tags:
+    - ufw
+- name: Set SoftEther service
+  ansible.builtin.import_tasks: service.yml
+- name: Set SoftEther config file
+  ansible.builtin.import_tasks: set_config.yml
   when: setting_backup

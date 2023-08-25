@@ -1,2 +1,4 @@
-- import_tasks: install.yml
-- import_tasks: config.yml
+- name: Install ufw
+  ansible.builtin.import_tasks: install.yml
+- name: Configure ufw
+  ansible.builtin.import_tasks: config.yml

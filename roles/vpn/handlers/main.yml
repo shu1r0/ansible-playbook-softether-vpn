@@ -1,6 +1,5 @@
-- name: restart softether
+- name: Restart softether
   become: true
-  become_user: root
-  service:
+  ansible.builtin.service:
     name: softether
     state: restarted

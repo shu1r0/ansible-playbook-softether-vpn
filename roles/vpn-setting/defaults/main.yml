@@ -1,0 +1,32 @@
+softether_dir: /opt/softether
+
+admin_pass:  "test_pass"
+default_hub_name: test_HUB
+default_hub_pass: "test_pass"
+default_bridge_dev: eth1
+default_tap: "yes"
+
+server_hostname: test
+ipsec_psk: test
+ipsec_additional_settings:
+  - SecureNatEnable
+  - NatEnable
+  - DHCPEnable
+
+vpn_users:
+  - name: test
+    passwd: test
+
+# Ref: https://ja.softether.org/4-docs/2-howto/L2TP_IPsec_Setup_Guide/1#section_11
+enable_udp_ports:
+  - "500"
+  - "4500"
+
+enable_tcp_ports:
+  - "443"
+  - "992"
+  - "1194"
+  - "5555"
+
+enable_ipsec_l2tp: true
+enable_vpn_azure: true

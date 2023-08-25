@@ -1,4 +1,2 @@
-- import_tasks: update.yml
-- import_tasks: upgrade.yml
-- import_tasks: install.yml
-- import_tasks: autoremove.yml
+- name: Install packages
+  import_tasks: install.yml

@@ -1,0 +1,25 @@
+- name: Setup config
+  import_tasks: config.yml
+  tags:
+    - configure
+- name: Enable IPsec/L2TP
+  import_tasks: ipsec_l2tp.yml
+  when: enable_ipsec_l2tp
+  tags:
+    - configure
+    - ipsec
+- name: Enable VPN azure
+  import_tasks: vpn_azure.yml
+  when: enable_vpn_azure
+  tags:
+    - configure
+    - azure
+- name: Start VPN azure
+  import_tasks: start_azure.yml
+  tags:
+    - start_azure
+- name: Stop VPN azure
+  import_tasks: stop_azure.yml
+  tags: 
+    - never
+    - stop_azure

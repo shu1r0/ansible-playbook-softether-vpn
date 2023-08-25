@@ -1,0 +1,8 @@
+- name: Enable L2TP over IPsec
+  become: true
+  ansible.builtin.command: "{{ softether_dir }}/vpncmd /SERVER 127.0.0.1 /ADMINHUB:{{ default_hub_name }} /CMD IPsecEnable /L2TP:yes /L2TPRAW:no /ETHERIP:no /PSK:{{ ipsec_psk }} /DEFAULTHUB:{{ default_hub_name }}"
+
+- name: Additional settings
+  become: true
+  ansible.builtin.command: "{{ softether_dir }}/vpncmd /SERVER 127.0.0.1 /HUB:{{ default_hub_name }} /CMD {{ item }}"
+  loop: "{{ ipsec_additional_settings }}"
